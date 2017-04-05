@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load widget_tweaks %}
+<div class="container">
+
+<div class="page-header">
+    <h1>Register<small> yourself as a donor here</small></h1>
+</div>
+
+<!-- Registration form - START -->
+<div class="container">
+    <div class="row">
+        <form action="" method="POST" role="form">
+            {% csrf_token %}
+            <div class="col-lg-6">
+                <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+                <div class="form-group">
+                    <label for="InputName">Enter Name</label>
+                    <div class="input-group">
+                            {{ form.name | add_class:'form-control' }}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputEmail">Enter Email</label>
+                    <div class="input-group">
+                        {{ form.email | add_class:'form-control' }}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputEmail">Password</label>
+                    <div class="input-group">
+                        {{ form.password1 | add_class:'form-control' }}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputMessage">Confirm Password</label>
+                    <div class="input-group">
+                        {{ form.password2 | add_class:'form-control' }}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputMessage">City</label>
+                    <div class="input-group">
+                        {{ form.city | add_class:'form-control' }}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputMessage">Street</label>
+                    <div class="input-group">
+                        {{ form.street | add_class:'form-control' }}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputMessage">PIN</label>
+                    <div class="input-group">
+                        {{ form.pin | add_class:'form-control' }}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputMessage">Contact No</label>
+                    <div class="input-group">
+                        {{ form.contact | add_class:'form-control' }}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputMessage">Age</label>
+                    <div class="input-group">
+                        {{ form.age| add_class:'form-control' }}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputMessage">DOB</label>
+                    <div class="input-group">
+                        <input type="date" id="dob" name="dob">
+{#                        {{ form.dob| add_class:'form-control' }}#}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputMessage">Gender</label>
+                    <div class="input-group">
+                        {{ form.gender| add_class:'form-control' }}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputMessage">Blood Group</label>
+                    <div class="input-group">
+                        {{ form.blood_group| add_class:'form-control' }}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+            </div>
+        </form>
+        <div class="col-lg-5 col-md-push-1">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <span class="glyphicon glyphicon-remove"></span><strong> {{ form.errors }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Registration form - END -->
+
+</div>
+
+{% endblock %}
