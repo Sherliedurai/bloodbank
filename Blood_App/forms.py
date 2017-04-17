@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.forms import RadioSelect
 
-from models import RegisteredUser,Address,BloodGroup
 
+from models import RegisteredUser,Address,BloodGroup,BloodPouch
+import models
 class RegistrationForm(forms.Form):
     GENDER_CHOICES = (
         ('Male', 'M'),
@@ -21,10 +22,9 @@ class RegistrationForm(forms.Form):
     name = forms.CharField(max_length=100)
     city = forms.CharField(max_length=50)
     street = forms.CharField(max_length=50)
-    pin = forms.CharField(max_length=6)
-    age = forms.CharField(max_length=2)
+    pin = forms.IntegerField()
     blood_group = forms.ChoiceField(choices=BLOOD_TYPES)
-    dob = forms.DateField
+    dob = forms.DateField()
     gender = forms.ChoiceField(choices=GENDER_CHOICES)
     contact = forms.CharField(max_length=13)
 
@@ -41,7 +41,6 @@ class RegistrationForm(forms.Form):
         data = self.cleaned_data
         password1 = data['password1']
         password2 = data['password2']
-        age = data['age']
 
         if password1 != password2:
             valid = False
@@ -57,11 +56,7 @@ class RegistrationForm(forms.Form):
             valid = False
             self._errors['password1'] = [u'Password should be atleast 8 characters long']
 
-        try:
-            int(age)
-        except:
-            valid = False
-            self._errors['mobile'] = [u'Invalid Age!']
+
 
         return valid
 
@@ -79,10 +74,9 @@ class RegistrationForm(forms.Form):
 
         gender = data['gender']
         contact = data['contact']
-        age = data['age']
-        # dob = data['dob']
+        dob = data['dob']
 
-        registered = RegisteredUser.objects.create(user=user,address=address,gender=gender,contact=contact,age=age,blood_group=blood)
+        registered = RegisteredUser.objects.create(user=user,address=address,gender=gender,contact=contact,blood_group=blood,dob=dob)
 
         return registered
 
@@ -106,4 +100,36 @@ class LoginForm(forms.Form):
             return user
         else:
             return "No User Found"
+
+class BloodPouch(forms.Form):
+
+    city = forms.CharField(max_length=50)
+    street = forms.CharField(max_length=50)
+    pin = forms.IntegerField()
+    blood_group = forms.ModelChoiceField(queryset=BloodGroup.objects.all())
+    donated_by = forms.ModelChoiceField(queryset=RegisteredUser.objects.all())
+    quantity = forms.IntegerField()
+    cholestrol_level = forms.FloatField()
+
+    def is_valid(self):
+
+        valid = super(BloodPouch, self).is_valid()
+
+        data = self.cleaned_data
+
+        city = data['city']
+
+        street = data['st']
+
+        address = Address.objects.create(city=city)
+
+
+class DonateForm(forms.ModelForm):
+    class Meta:
+        model = models.BloodPouch
+        fields = ['chlorestrol_level','quantity']
+
+
+
+
 

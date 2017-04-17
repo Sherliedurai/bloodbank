@@ -32,6 +32,7 @@
                 <input type="submit" name="Login" id="submit" value="Submit" class="btn btn-info pull-right">
             </div>
         </form>
+        {% if form.errors %}
         <div class="col-lg-5 col-md-push-1">
             <div class="col-md-12">
                 <div class="alert alert-danger">
@@ -39,6 +40,8 @@
                 </div>
             </div>
         </div>
+        {% endif %}
+    <a href="{% url 'registration' %}" class="btn-primary pull-right"> Register</a>
     </div>
 </div>
 <!-- Registration form - END -->

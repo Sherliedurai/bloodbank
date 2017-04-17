@@ -39,6 +39,31 @@
 				</tbody>
 			</table>
 		</div>
-<a href="{% url 'donate' %}" class="btn-primary">Donate</a>
+<div class="panel-heading">Requested Pouches</div>
+			<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th style="text-align: center">S.No</th>
+						<th style="text-align: center">Requested By</th>
+						<th style="text-align: center">Contact</th>
+						<th style="text-align: center">Blood Group</th>
+                        <th style="text-align: center">Issue</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for request in requests %}
+						<tr>
+							<td align="center">{{ forloop.counter }}</td>
+							<td align="center">{{ request.requested_by__user__first_name }}</td>
+							<td align="center">{{ request.requested_by__contact }}</td>
+							<td align="center">{{request.requested_pouch__blood_type__group }}</td>
+							<td align="center"><a href="{% url 'issue' pk=request.id %}" class="btn btn-default"><i class="fa fa-edit"></i></a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 </div>
 {% endblock %}
