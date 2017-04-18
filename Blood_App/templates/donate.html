@@ -4,7 +4,7 @@
 {% load widget_tweaks %}
     <center>
         <h3>Donation Details</h3>
-<form action="{% url 'donate' %}" method="post" role="form">
+<form action="{% url 'donate' %}" method="post">
 {% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Submit"/>
